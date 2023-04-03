@@ -51,7 +51,9 @@ export class PopinProductComponent{
 
   }
 
+  // ajout de la fonction remove afin d'éviter l'insertion d'un produit vide
   onNoClick() {
+    this.apiService.removeProduct(this.produit);
     this.dialogRef.close();
   }
 }
