@@ -11,15 +11,15 @@ import {ApiService} from "../../services/api/api.service";
 export class PopinProductComponent{
 
 
-  public produit : Produit;
+  public produit : Produit = Object.create(null) ;
   private mode: string = '';
 
   constructor(public dialogRef: MatDialogRef<PopinProductComponent>,
               private apiService: ApiService,
               @Inject(MAT_DIALOG_DATA) private data : any) {
 
-    if (data?.produit) {
-      this.produit = data.produit;
+    if (data?.produit ) {
+      this.produit = data.produit
     }
     else {
       let productSample = {
