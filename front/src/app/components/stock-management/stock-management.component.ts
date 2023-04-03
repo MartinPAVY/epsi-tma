@@ -58,7 +58,8 @@ export class StockManagementComponent implements OnInit{
     const dialogRef = this.dialog.open(PopinProductComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      this.products.push(result);
+      typeof result.name === "string" && typeof result.price === "number" && typeof result.quantity === "number" ?
+        this.products.push(result) : alert('typeError')
     });
 
   }
