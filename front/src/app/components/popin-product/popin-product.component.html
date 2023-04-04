@@ -12,7 +12,7 @@
   <mat-form-field appearance="fill">
     <mat-label>prix</mat-label>
     <input matInput [(ngModel)]="produit.price"
-           type="number" min="1"
+           type="number" min="0.01" step="0.01"
     />
   </mat-form-field>
 
@@ -20,7 +20,7 @@
   <mat-form-field appearance="fill">
     <mat-label>quantité</mat-label>
     <input matInput [(ngModel)]="produit.quantity"
-           type="number" min="1"
+           type="number" min="1" step="1"
     />
   </mat-form-field>
 

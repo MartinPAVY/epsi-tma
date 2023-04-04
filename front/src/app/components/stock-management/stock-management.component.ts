@@ -54,7 +54,7 @@ export class StockManagementComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       //Empêche le post d'éléments d'autre types que ceux voulu
       typeof result.name === "string" && typeof result.price === "number" && typeof result.quantity === "number" ?
-        result.price >0 && result.quantity > 0 ?  this.products.push(result) : alert('quantityError')
+        result.price >0 && result.quantity > 0 && result.quantity %1 != 0?  this.products.push(result) : alert('quantityError')
          : alert('typeError')
     });
 
