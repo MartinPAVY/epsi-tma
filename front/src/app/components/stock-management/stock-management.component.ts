@@ -37,12 +37,13 @@ export class StockManagementComponent implements OnInit{
   }
 
   removeOneProduct(product: Produit) {
-    product.quantity=product.quantity-1;
-    if(product.quantity == 0){
-      this.products = this.products.filter(produit => produit.id = product.id);
-      this.apiService.removeProduct(product);
+    if(product.quantity < 1){
+      //this.products = this.products.filter(produit => produit.id = product.id);
+      //this.apiService.removeProduct(product);
+      alert("La quantité ne peux être négative")
     }
     else{
+      product.quantity=product.quantity-1;
       this.apiService.modifyProduct(product);
     }
 
@@ -54,7 +55,7 @@ export class StockManagementComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       //Empêche le post d'éléments d'autre types que ceux voulu
       typeof result.name === "string" && typeof result.price === "number" && typeof result.quantity === "number" ?
-        result.price >0 && result.quantity > 0 && result.quantity %1 != 0?  this.products.push(result) : alert('quantityError')
+        result.price >0 && result.quantity > 0 && Number.isInteger(result.quantity) ?  this.products.push(result) : alert('quantityError')
          : alert('typeError')
     });
 
