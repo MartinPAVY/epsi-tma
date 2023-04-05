@@ -16,7 +16,8 @@ export class ApiService {
   }
 
   modifyProduct(product: Produit) {
-    this.http.put<Produit>(this.url + product.id,product.serialize()).subscribe();
+    //serialize() removed  after product.id, on product.serialize() car sert a initialiser
+    this.http.put<Produit>(this.url + product.id,product).subscribe();
   }
 
   getallProduct(){

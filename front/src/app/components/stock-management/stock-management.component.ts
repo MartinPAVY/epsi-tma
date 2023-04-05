@@ -38,6 +38,7 @@ export class StockManagementComponent implements OnInit{
 
   removeOneProduct(product: Produit) {
     if(product.quantity < 1){
+      //décommenter la ligne 43 si le produit doit être supprimé une fois la quantité à 0
       //this.products = this.products.filter(produit => produit.id = product.id);
       //this.apiService.removeProduct(product);
       alert("La quantité ne peux être négative")
@@ -55,16 +56,17 @@ export class StockManagementComponent implements OnInit{
     dialogRef.afterClosed().subscribe(result => {
       //Empêche le post d'éléments d'autre types que ceux voulu
       typeof result.name === "string" && typeof result.price === "number" && typeof result.quantity === "number" ?
-        result.price >0 && result.quantity > 0 && Number.isInteger(result.quantity) ?  this.products.push(result) : alert('quantityError')
-         : alert('typeError')
+        result.price >0 && result.quantity > 0 && Number.isInteger(result.quantity) ?  this.products.push(result)
+          : alert('Erreur ! Le prix et la quantité doivent être positifs. La quantité doit également être un entier')
+         : alert('Erreur ! Le nom doit être une chaine de caractère tandis que les prix et quantité doivent être des nombres')
     });
 
   }
 
   addProduct(product: Produit) {
-    if (this.products.find(produit => produit.id == product.id)){
-      // @ts-ignore
-      this.products.find(produit => produit.id == product.id).quantity += 1;
+    const productExist = this.products.find(produit => produit.id == product.id)
+    if (productExist){
+      productExist.quantity += 1;
       this.apiService.modifyProduct(product);
     }
   }
